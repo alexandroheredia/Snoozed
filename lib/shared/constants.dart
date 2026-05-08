@@ -27,7 +27,7 @@ String generateTaskDocID() {
 
 
 // returns the UID for the current logged in user
-myUID(BuildContext context){
+String myUID(BuildContext context){
   var user = Provider.of<User>(context, listen: false);
   var myUID = user.uid;
 
@@ -43,7 +43,7 @@ const loadingWidget = SpinKitCircle(
 );
 
 
-myTasksDBCollection(BuildContext context){
+CollectionReference<Map<String, dynamic>> myTasksDBCollection(BuildContext context){
   var dbReference = 
     FirebaseFirestore.instance
     .collection('users')

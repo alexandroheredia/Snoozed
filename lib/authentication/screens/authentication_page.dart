@@ -5,7 +5,7 @@ import 'package:smarttodo/authentication/screens/sign_in.dart';
 import 'package:smarttodo/authentication/screens/sign_up.dart';
 
 class AuthenticationPage extends StatefulWidget {
-  const AuthenticationPage({Key? key}) : super(key: key);
+  const AuthenticationPage({super.key});
 
   @override
   State<AuthenticationPage> createState() => _AuthenticationPageState();
@@ -54,7 +54,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: CupertinoColors.black.withOpacity(0),
+                            color: CupertinoColors.black.withValues(alpha: 0),
                             spreadRadius: 4,
                             blurRadius: 10,
                             offset: Offset(0, 3),
@@ -91,7 +91,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: CupertinoColors.black.withOpacity(0.1),
+                            color: CupertinoColors.black.withValues(alpha: 0.1),
                             spreadRadius: 4,
                             blurRadius: 10,
                             offset: Offset(0, 3),

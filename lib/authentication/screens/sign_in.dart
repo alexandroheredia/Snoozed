@@ -7,7 +7,7 @@ import 'package:smarttodo/authentication/services/authentication_service.dart';
 
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -132,7 +132,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: CupertinoColors.black.withOpacity(0.1),
+                            color: CupertinoColors.black.withValues(alpha: 0.1),
                             spreadRadius: 4,
                             blurRadius: 10,
                             offset: Offset(0, 3),

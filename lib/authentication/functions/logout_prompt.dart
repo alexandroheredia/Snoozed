@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:smarttodo/authentication/services/authentication_service.dart';
 
 
-logoutConfirmationPrompt(BuildContext context){
+Future<void> logoutConfirmationPrompt(BuildContext context) {
   return showCupertinoDialog(
     context: context,
     builder: (_) {
@@ -21,6 +21,9 @@ logoutConfirmationPrompt(BuildContext context){
             ),
             onPressed: () async {
               await context.read<AuthenticationService>().signOut();
+              if (!context.mounted) {
+                return;
+              }
               Navigator.of(context, rootNavigator: true).pop();
             },
           ),

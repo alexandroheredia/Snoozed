@@ -8,7 +8,7 @@ import 'package:smarttodo/shared/constants.dart';
 
 
 
-showTaskListPanel(BuildContext context) {
+void showTaskListPanel(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -86,7 +86,7 @@ showTaskListPanel(BuildContext context) {
                                                           },
                                                           backgroundColor: CupertinoColors.systemRed,
                                                           foregroundColor: Colors.white,
-                                                          icon: FontAwesomeIcons.trashCan,
+                                                          icon: Icons.delete_outline,
                                                           borderRadius: const BorderRadius.all(Radius.circular(5.0)),
                                                         ),
                                                       ],
@@ -118,10 +118,10 @@ showTaskListPanel(BuildContext context) {
                                                                             child: Row(
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: const [
-                                                                                Icon(FontAwesomeIcons.circle,
+                                                                                FaIcon(
+                                                                                  FontAwesomeIcons.circle,
                                                                                   size: 26,
-                                                                                  
-                                                                                )
+                                                                                ),
                                                                               ],
                                                                             ),
                                                                           ),
@@ -183,10 +183,11 @@ showTaskListPanel(BuildContext context) {
                                                                               child: Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: const [
-                                                                                  Icon(FontAwesomeIcons.solidCircleCheck,
+                                                                                  FaIcon(
+                                                                                    FontAwesomeIcons.solidCircleCheck,
                                                                                     color: CupertinoColors.activeGreen,
                                                                                     size: 26,
-                                                                                  )
+                                                                                  ),
                                                                                 ],
                                                                               ),
                                                                             ),
@@ -263,7 +264,7 @@ showTaskListPanel(BuildContext context) {
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: CupertinoColors.black.withOpacity(0.1),
+                                        color: CupertinoColors.black.withValues(alpha: 0.1),
                                         spreadRadius: 4,
                                         blurRadius: 10,
                                         offset: const Offset(0, 3),

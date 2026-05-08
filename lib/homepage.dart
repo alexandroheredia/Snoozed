@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 
 class HomePage extends StatefulWidget {
-    const HomePage({Key? key}) : super(key: key);
+    const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
           ),
           trailing: CupertinoButton(
             padding: const EdgeInsets.all(0),
-            child: const Icon(FontAwesomeIcons.rightToBracket),
+            child: const FaIcon(FontAwesomeIcons.rightToBracket),
             onPressed: () {
               logoutConfirmationPrompt(context);
             }
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: CupertinoColors.black.withOpacity(0),
+                                                      color: CupertinoColors.black.withValues(alpha: 0),
                                                       spreadRadius: 4,
                                                       blurRadius: 10,
                                                       offset: const Offset(0, 3),
@@ -242,7 +242,8 @@ class _HomePageState extends State<HomePage> {
                                                     Row(
                                                       children: [
                                                         const SizedBox(width: 17,),
-                                                        const Icon(FontAwesomeIcons.link,
+                                                        const FaIcon(
+                                                          FontAwesomeIcons.link,
                                                           size: 26,
                                                         ),
                                                         const SizedBox(width: 12,),
@@ -311,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                                                         ),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: CupertinoColors.black.withOpacity(0),
+                                                            color: CupertinoColors.black.withValues(alpha: 0),
                                                             spreadRadius: 4,
                                                             blurRadius: 10,
                                                             offset: const Offset(0, 3),
@@ -346,7 +347,7 @@ class _HomePageState extends State<HomePage> {
                                                         ),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: CupertinoColors.black.withOpacity(0),
+                                                            color: CupertinoColors.black.withValues(alpha: 0),
                                                             spreadRadius: 4,
                                                             blurRadius: 10,
                                                             offset: const Offset(0, 3),
@@ -393,7 +394,7 @@ class _HomePageState extends State<HomePage> {
                                                       ),
                                                       boxShadow: [
                                                         BoxShadow(
-                                                          color: CupertinoColors.black.withOpacity(0),
+                                                          color: CupertinoColors.black.withValues(alpha: 0),
                                                           spreadRadius: 4,
                                                           blurRadius: 10,
                                                           offset: const Offset(0, 3),
@@ -434,7 +435,8 @@ class _HomePageState extends State<HomePage> {
                                                               return Row(
                                                                 children: [
                                                                   const SizedBox(width: 17,),
-                                                                  const Icon(FontAwesomeIcons.link,
+                                                                  const FaIcon(
+                                                                    FontAwesomeIcons.link,
                                                                     size: 26,
                                                                   ),
                                                                   const SizedBox(width: 12,),
@@ -482,8 +484,10 @@ class _HomePageState extends State<HomePage> {
                                                           return CupertinoButton(
                                                           padding: const EdgeInsets.all(0),
                                                           pressedOpacity: 0.8,
-                                                          child: const Icon(FontAwesomeIcons.pen,
-                                                            size: 22,),
+                                                          child: const FaIcon(
+                                                            FontAwesomeIcons.pen,
+                                                            size: 22,
+                                                          ),
                                                           onPressed: (){
                                                             setState(() {
                                                               editTaskTitleController.text = taskTile;
@@ -517,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: CupertinoColors.systemGrey.withOpacity(0.05),
+                                                      color: CupertinoColors.systemGrey.withValues(alpha: 0.05),
                                                       spreadRadius: 4,
                                                       blurRadius: 10,
                                                       offset: const Offset(0, 3),
@@ -525,10 +529,11 @@ class _HomePageState extends State<HomePage> {
                                                   ]
                                                 ),
                                                 child: CupertinoButton(
-                                                  child: const Icon(FontAwesomeIcons.trashCan,
+                                                  child: const FaIcon(
+                                                  FontAwesomeIcons.trashCan,
                                                   color: CupertinoColors.systemRed,
-                                                    size: 30,
-                                                  ),
+                                                  size: 30,
+                                                ),
                                                   onPressed: () {
                                                     deleteTask();
                                                   },
@@ -547,7 +552,7 @@ class _HomePageState extends State<HomePage> {
                                                       ),
                                                       boxShadow: [
                                                         BoxShadow(
-                                                          color: CupertinoColors.systemGrey.withOpacity(0.05),
+                                                          color: CupertinoColors.systemGrey.withValues(alpha: 0.05),
                                                           spreadRadius: 4,
                                                           blurRadius: 10,
                                                           offset: const Offset(0, 3),
@@ -555,10 +560,11 @@ class _HomePageState extends State<HomePage> {
                                                       ]
                                                     ),
                                                     child: CupertinoButton(
-                                                      child: const Icon(FontAwesomeIcons.check,
+                                                      child: const FaIcon(
+                                                      FontAwesomeIcons.check,
                                                       color: CupertinoColors.activeGreen,
-                                                        size: 55,
-                                                      ),
+                                                      size: 55,
+                                                    ),
                                                       onPressed: (){
                                                         markTaskAsCompleted();
                                                       },
@@ -576,7 +582,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: CupertinoColors.systemGrey.withOpacity(0.05),
+                                                      color: CupertinoColors.systemGrey.withValues(alpha: 0.05),
                                                       spreadRadius: 4,
                                                       blurRadius: 10,
                                                       offset: const Offset(0, 3),
@@ -584,10 +590,11 @@ class _HomePageState extends State<HomePage> {
                                                   ]
                                                 ),
                                                 child: CupertinoButton(
-                                                  child: const Icon(FontAwesomeIcons.share,
+                                                  child: const FaIcon(
+                                                  FontAwesomeIcons.share,
                                                   color: Color.fromARGB(255, 255, 179, 0),
-                                                    size: 30,
-                                                  ),
+                                                  size: 30,
+                                                ),
                                                   onPressed: (){
                                                     skipTask();
                                                   },
@@ -670,7 +677,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: CupertinoColors.systemGrey.withOpacity(0.05),
+                        color: CupertinoColors.systemGrey.withValues(alpha: 0.05),
                         spreadRadius: 4,
                         blurRadius: 10,
                         offset: const Offset(0, 3),
@@ -678,8 +685,10 @@ class _HomePageState extends State<HomePage> {
                     ]
                   ),
                   child: CupertinoButton(
-                    child: const Icon(FontAwesomeIcons.bars,
-                    color: CupertinoColors.white,),
+                    child: const FaIcon(
+                    FontAwesomeIcons.bars,
+                    color: CupertinoColors.white,
+                  ),
                     onPressed: (){
                       showTaskListPanel(context);
                     },
@@ -695,7 +704,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: CupertinoColors.systemGrey.withOpacity(0.05),
+                        color: CupertinoColors.systemGrey.withValues(alpha: 0.05),
                         spreadRadius: 4,
                         blurRadius: 10,
                         offset: const Offset(0, 3),
@@ -703,8 +712,10 @@ class _HomePageState extends State<HomePage> {
                     ]
                   ),
                   child: CupertinoButton(
-                    child: const Icon(FontAwesomeIcons.plus,
-                    color: CupertinoColors.white,),
+                    child: const FaIcon(
+                    FontAwesomeIcons.plus,
+                    color: CupertinoColors.white,
+                  ),
                     onPressed: (){
                       _showAddTaskPanel(context);
                     },
@@ -734,7 +745,7 @@ Future<void> _launchInBrowser(Uri url) async {
     }
   }
 
-  _showAddTaskPanel(BuildContext context) {
+  void _showAddTaskPanel(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -912,7 +923,7 @@ Future<void> _launchInBrowser(Uri url) async {
                                                   ),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: CupertinoColors.black.withOpacity(0.1),
+                                                      color: CupertinoColors.black.withValues(alpha: 0.1),
                                                       spreadRadius: 4,
                                                       blurRadius: 10,
                                                       offset: const Offset(0, 3),
@@ -974,7 +985,7 @@ Future<void> _launchInBrowser(Uri url) async {
   }
 
 
-  saveTaskToFirestore(){
+  void saveTaskToFirestore(){
     myTasksDBCollection(context)
     .doc(taskDocID)
     .set({

@@ -5,7 +5,7 @@ import 'package:smarttodo/authentication/screens/authentication_page.dart';
 import 'package:smarttodo/homepage.dart';
 
 class AuthenticationWrapper extends StatelessWidget {
-  const AuthenticationWrapper({Key? key}) : super(key: key);
+  const AuthenticationWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {

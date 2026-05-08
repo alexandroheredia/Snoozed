@@ -4,7 +4,7 @@ import 'package:smarttodo/shared/constants.dart';
 
 
 
-deleteCompletedTasks(BuildContext context) async {
+Future<void> deleteCompletedTasks(BuildContext context) async {
   QuerySnapshot eventsQuery = 
     await myTasksDBCollection(context)
     .where('isTaskCompleted', isEqualTo: true)

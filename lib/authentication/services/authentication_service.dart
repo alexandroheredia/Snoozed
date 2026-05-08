@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:smarttodo/authentication/services/database_service.dart';
-import 'package:smarttodo/authentication/services/wrapper.dart';
 import 'package:smarttodo/models/app_user.dart';
 
 class AuthenticationService {
@@ -27,15 +26,15 @@ class AuthenticationService {
   Future<String?> signIn({required String email, required String password, required BuildContext context}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, 
-          password: password);
-
-        Future.delayed(Duration(milliseconds: 400), () {
-            Navigator.of(context, rootNavigator: true).pushReplacement(
-                CupertinoPageRoute(builder: (_) => AuthenticationWrapper()));
-          });
+        email: email,
+        password: password,
+      );
       return 'Signed in';
     } on FirebaseAuthException catch (e) {
+      if (!context.mounted) {
+        return e.message;
+      }
+
       if (e.code == 'user-not-found') {
         showCupertinoDialog(
           context: context,

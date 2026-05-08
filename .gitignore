@@ -6,3 +6,5 @@
 
 ios/Runner/GoogleService-Info.plist
 android/app/google-services.json
+AGENTS.md
+macos/Podfile.lock

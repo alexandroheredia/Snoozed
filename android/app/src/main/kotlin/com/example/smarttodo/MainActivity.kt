@@ -1,4 +1,4 @@
-package com.example.smarttodo
+package com.snoozed
 
 import io.flutter.embedding.android.FlutterActivity
 
