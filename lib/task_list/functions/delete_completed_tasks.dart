@@ -1,16 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:smarttodo/shared/constants.dart';
+// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, because this is an app-internal helper.
 
+import 'package:smarttodo/data/tasks_repository.dart';
 
-
-Future<void> deleteCompletedTasks(BuildContext context) async {
-  QuerySnapshot eventsQuery = 
-    await myTasksDBCollection(context)
-    .where('isTaskCompleted', isEqualTo: true)
-    .get();
-
-  for (var value in eventsQuery.docs) {
-    value.reference.delete();
-  }
+Future<void> deleteCompletedTasks() async {
+  await TasksRepository.instance.deleteCompletedTasks();
 }
