@@ -8,6 +8,7 @@ const _charsABC123 =
 
 final Random _random = Random();
 
+/// Generates a random local identifier for a task.
 String generateTaskDocID() {
   return String.fromCharCodes(
     Iterable<int>.generate(
@@ -17,8 +18,10 @@ String generateTaskDocID() {
   );
 }
 
+/// The user-visible app version shown in the UI.
 const appVersionNumber = '2.0.0 2026050901';
 
+/// Shared loading indicator used across the app.
 const loadingWidget = SpinKitCircle(
   color: CupertinoColors.white,
 );

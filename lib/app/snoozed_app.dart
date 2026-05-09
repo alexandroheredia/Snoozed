@@ -1,12 +1,12 @@
-// ignore_for_file: public_member_api_docs, because this is app-internal.
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smarttodo/core/constants.dart';
 import 'package:smarttodo/features/tasks/tasks.dart';
 
+/// The root application widget for Snoozed.
 class SnoozedApp extends StatelessWidget {
+  /// Creates the Snoozed application shell.
   const SnoozedApp({super.key});
 
   @override

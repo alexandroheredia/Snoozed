@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, because this is app-internal UI code.
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -7,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smarttodo/features/tasks/domain/task.dart';
 
+/// Displays task-loading errors on the home screen.
 class TasksErrorState extends StatelessWidget {
+  /// Creates the error state widget.
   const TasksErrorState({required this.message, super.key});
 
+  /// The error message to display.
   final String message;
 
   @override
@@ -29,12 +30,15 @@ class TasksErrorState extends StatelessWidget {
   }
 }
 
+/// Displays the empty state when there is no current task.
 class EmptyState extends StatelessWidget {
+  /// Creates the empty state widget.
   const EmptyState({
     required this.onAddTask,
     super.key,
   });
 
+  /// Called when the user wants to create the first task.
   final Future<void> Function(BuildContext context) onAddTask;
 
   @override
@@ -58,7 +62,8 @@ class EmptyState extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         const Text(
-          'Add a task and Snoozed will show you one thing to focus on at a time.',
+          'Add a task and Snoozed will show you one thing to focus on at a '
+          'time.',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: CupertinoColors.systemGrey2,
@@ -77,7 +82,9 @@ class EmptyState extends StatelessWidget {
   }
 }
 
+/// Displays the single current task and its actions.
 class TaskCard extends StatelessWidget {
+  /// Creates a task card.
   const TaskCard({
     required this.task,
     required this.onDelete,
@@ -88,11 +95,22 @@ class TaskCard extends StatelessWidget {
     super.key,
   });
 
+  /// The task currently being displayed.
   final Task task;
+
+  /// Called when the task should be deleted.
   final Future<void> Function() onDelete;
+
+  /// Called when the task should be completed.
   final Future<void> Function() onComplete;
+
+  /// Called when the task should be edited.
   final VoidCallback onEdit;
+
+  /// Called when the task link should be opened.
   final VoidCallback? onOpenLink;
+
+  /// Called when the task should be snoozed.
   final Future<void> Function() onSnooze;
 
   @override
@@ -174,8 +192,8 @@ class TaskCard extends StatelessWidget {
                         foregroundColor: CupertinoColors.systemGrey2,
                       ),
                       TaskPillLabel(
-                        label:
-                            'Skipped ${task.timesSkipped - 1} time${task.timesSkipped == 1 ? '' : 's'}',
+                        label: 'Skipped ${task.timesSkipped - 1} '
+                            'time${task.timesSkipped == 1 ? '' : 's'}',
                         backgroundColor: const Color.fromARGB(255, 48, 49, 73),
                         foregroundColor: CupertinoColors.systemGrey2,
                       ),
@@ -245,7 +263,9 @@ class TaskCard extends StatelessWidget {
   }
 }
 
+/// Displays summary chips above the current task.
 class TaskSummaryHeader extends StatelessWidget {
+  /// Creates the task summary header.
   const TaskSummaryHeader({
     required this.pendingCount,
     required this.dueDate,
@@ -253,8 +273,13 @@ class TaskSummaryHeader extends StatelessWidget {
     super.key,
   });
 
+  /// The number of incomplete tasks.
   final int pendingCount;
+
+  /// The current task's due date.
   final DateTime dueDate;
+
+  /// The number of times the current task was snoozed.
   final int timesSkipped;
 
   @override
@@ -277,14 +302,15 @@ class TaskSummaryHeader extends StatelessWidget {
           runSpacing: 8,
           children: [
             TaskPillLabel(
-              label: '$pendingCount active task${pendingCount == 1 ? '' : 's'}',
+              label: '$pendingCount active '
+                  'task${pendingCount == 1 ? '' : 's'}',
               backgroundColor: const Color.fromARGB(255, 38, 39, 58),
               foregroundColor: CupertinoColors.white,
             ),
             if (timesSkipped > 1)
               TaskPillLabel(
-                label:
-                    '${timesSkipped - 1} snooze${timesSkipped == 2 ? '' : 's'}',
+                label: '${timesSkipped - 1} '
+                    'snooze${timesSkipped == 2 ? '' : 's'}',
                 backgroundColor: const Color.fromARGB(255, 48, 49, 73),
                 foregroundColor: CupertinoColors.systemGrey2,
               ),
@@ -295,7 +321,9 @@ class TaskSummaryHeader extends StatelessWidget {
   }
 }
 
+/// Displays a rounded pill label used across the home screen.
 class TaskPillLabel extends StatelessWidget {
+  /// Creates a pill label.
   const TaskPillLabel({
     required this.label,
     required this.backgroundColor,
@@ -303,8 +331,13 @@ class TaskPillLabel extends StatelessWidget {
     super.key,
   });
 
+  /// The text shown inside the pill.
   final String label;
+
+  /// The pill background color.
   final Color backgroundColor;
+
+  /// The pill text color.
   final Color foregroundColor;
 
   @override
@@ -327,7 +360,9 @@ class TaskPillLabel extends StatelessWidget {
   }
 }
 
+/// Displays a circular action button used on the home screen.
 class RoundActionButton extends StatelessWidget {
+  /// Creates a round action button.
   const RoundActionButton({
     required this.onPressed,
     required this.child,
@@ -335,8 +370,13 @@ class RoundActionButton extends StatelessWidget {
     super.key,
   });
 
+  /// Called when the button is pressed.
   final VoidCallback onPressed;
+
+  /// The widget shown inside the button.
   final Widget child;
+
+  /// The button's width and height.
   final double size;
 
   @override
@@ -365,6 +405,7 @@ class RoundActionButton extends StatelessWidget {
   }
 }
 
+/// Formats a due date for the header summary above the task card.
 String formatDueHeadline(DateTime dueDate) {
   final now = DateTime.now();
   final today = DateTime(now.year, now.month, now.day);
@@ -386,6 +427,7 @@ String formatDueHeadline(DateTime dueDate) {
   return 'Due in $difference days';
 }
 
+/// Formats a due date for the pills shown on a task card.
 String formatDueLabel(DateTime dueDate) {
   final now = DateTime.now();
   final today = DateTime(now.year, now.month, now.day);

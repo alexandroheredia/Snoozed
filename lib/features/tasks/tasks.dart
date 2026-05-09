@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, because this is a feature barrel.
-
 export 'application/delete_completed_tasks.dart';
 export 'domain/task.dart';
 export 'presentation/pages/home_page.dart';

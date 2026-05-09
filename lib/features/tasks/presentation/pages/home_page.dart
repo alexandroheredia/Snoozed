@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, because this is app-internal UI code.
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -17,7 +15,9 @@ import 'package:smarttodo/features/tasks/providers/task_mutation_providers.dart'
 import 'package:smarttodo/features/tasks/providers/task_query_providers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// The main screen of Snoozed, showing a single current task at a time.
 class HomePage extends ConsumerStatefulWidget {
+  /// Creates the home page.
   const HomePage({super.key});
 
   @override

@@ -1,17 +1,18 @@
 import 'dart:async';
 
-// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, because this is an app-internal repository.
-
 import 'package:path/path.dart' as p;
 import 'package:smarttodo/features/tasks/domain/task.dart';
 import 'package:sqflite/sqflite.dart';
 
+/// Persists and queries tasks from the local SQLite database.
 class TasksRepository {
+  /// Creates a tasks repository.
   TasksRepository();
 
   Database? _database;
   final StreamController<void> _changes = StreamController<void>.broadcast();
 
+  /// Opens the database and creates its schema when needed.
   Future<void> initialize() async {
     if (_database != null) {
       return;
@@ -45,16 +46,19 @@ class TasksRepository {
     return _database!;
   }
 
+  /// Watches all tasks, ordered with incomplete tasks first.
   Stream<List<Task>> watchAllTasks() async* {
     yield await getAllTasks();
     yield* _changes.stream.asyncMap((_) => getAllTasks());
   }
 
+  /// Watches only incomplete tasks ordered by due date.
   Stream<List<Task>> watchPendingTasks() async* {
     yield await getPendingTasks();
     yield* _changes.stream.asyncMap((_) => getPendingTasks());
   }
 
+  /// Returns every task in display order.
   Future<List<Task>> getAllTasks() async {
     final database = await _db;
     final rows = await database.query(
@@ -64,6 +68,7 @@ class TasksRepository {
     return rows.map(Task.fromMap).toList();
   }
 
+  /// Returns only incomplete tasks in display order.
   Future<List<Task>> getPendingTasks() async {
     final database = await _db;
     final rows = await database.query(
@@ -75,6 +80,7 @@ class TasksRepository {
     return rows.map(Task.fromMap).toList();
   }
 
+  /// Inserts a new [task].
   Future<void> addTask(Task task) async {
     final database = await _db;
     await database.insert(
@@ -85,6 +91,7 @@ class TasksRepository {
     _notifyChanges();
   }
 
+  /// Updates an existing [task].
   Future<void> updateTask(Task task) async {
     final database = await _db;
     await database.update(
@@ -96,6 +103,7 @@ class TasksRepository {
     _notifyChanges();
   }
 
+  /// Deletes the task identified by [id].
   Future<void> deleteTask(String id) async {
     final database = await _db;
     await database.delete(
@@ -106,6 +114,7 @@ class TasksRepository {
     _notifyChanges();
   }
 
+  /// Updates the completion state for the task identified by [id].
   Future<void> setTaskCompleted(String id, {required bool isCompleted}) async {
     final database = await _db;
     await database.update(
@@ -117,6 +126,7 @@ class TasksRepository {
     _notifyChanges();
   }
 
+  /// Snoozes [task] by moving its due date forward.
   Future<void> snoozeTask(Task task) async {
     final database = await _db;
     final updatedDueDate = task.dueDate.add(Duration(days: task.timesSkipped));
@@ -132,6 +142,7 @@ class TasksRepository {
     _notifyChanges();
   }
 
+  /// Removes all completed tasks.
   Future<void> deleteCompletedTasks() async {
     final database = await _db;
     await database.delete(
@@ -148,6 +159,7 @@ class TasksRepository {
     }
   }
 
+  /// Disposes repository resources.
   Future<void> close() async {
     await _changes.close();
     await _database?.close();
