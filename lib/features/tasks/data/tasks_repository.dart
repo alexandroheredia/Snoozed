@@ -3,13 +3,11 @@ import 'dart:async';
 // ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, because this is an app-internal repository.
 
 import 'package:path/path.dart' as p;
-import 'package:smarttodo/models/task.dart';
+import 'package:smarttodo/features/tasks/domain/task.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TasksRepository {
-  TasksRepository._();
-
-  static final TasksRepository instance = TasksRepository._();
+  TasksRepository();
 
   Database? _database;
   final StreamController<void> _changes = StreamController<void>.broadcast();

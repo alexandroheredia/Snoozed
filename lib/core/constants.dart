@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, lines_longer_than_80_chars, because this file only contains app-internal helpers.
-
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-const _charsABC123 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+const _charsABC123 =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 
 final Random _random = Random();
 
@@ -18,7 +17,7 @@ String generateTaskDocID() {
   );
 }
 
-const appVersionNumber = '1.1.3';
+const appVersionNumber = '2.0.0 2026050901';
 
 const loadingWidget = SpinKitCircle(
   color: CupertinoColors.white,
