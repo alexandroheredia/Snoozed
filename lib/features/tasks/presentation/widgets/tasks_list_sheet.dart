@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, use_colored_box, lines_longer_than_80_chars, unnecessary_lambdas, avoid_redundant_argument_values, because this is app-internal UI code.
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +9,7 @@ import 'package:smarttodo/features/tasks/domain/task.dart';
 import 'package:smarttodo/features/tasks/providers/task_mutation_providers.dart';
 import 'package:smarttodo/features/tasks/providers/task_query_providers.dart';
 
+/// Shows the bottom sheet containing all tasks.
 void showTaskListPanel(BuildContext context) {
   showModalBottomSheet<void>(
     context: context,
@@ -19,141 +18,143 @@ void showTaskListPanel(BuildContext context) {
     builder: (sheetContext) {
       return Consumer(
         builder: (context, ref, child) {
-          final tasksAsync = ref.watch(allTasksProvider);
-          final taskCountsAsync = ref.watch(taskCountsProvider);
-
           return GestureDetector(
             onTap: () => Navigator.of(sheetContext).pop(),
-            child: Container(
-              color: const Color.fromRGBO(0, 0, 0, 0.001),
-              child: GestureDetector(
-                onTap: () {},
-                child: DraggableScrollableSheet(
-                  initialChildSize: 0.72,
-                  minChildSize: 0.2,
-                  builder: (_, controller) {
-                    return Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF28293d),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25),
-                          topRight: Radius.circular(25),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(height: 15),
-                          const Text(
-                            'My Tasks',
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: CupertinoColors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: tasksAsync.when(
-                                loading: () => loadingWidget,
-                                error: (error, stackTrace) => _TaskListError(
-                                  message: error.toString(),
-                                ),
-                                data: (tasks) {
-                                  final counts = taskCountsAsync.asData?.value;
-                                  final completedCount = counts?.completedCount ?? 0;
-                                  final pendingCount = counts?.pendingCount ?? 0;
-
-                                  if (tasks.isEmpty) {
-                                    return const Center(
-                                      child: Text('no tasks to show'),
-                                    );
-                                  }
-
-                                  return Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                          8,
-                                          0,
-                                          8,
-                                          12,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            _CountChip(
-                                              label: '$pendingCount active',
-                                              color: const Color.fromARGB(
-                                                255,
-                                                69,
-                                                71,
-                                                104,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 8),
-                                            _CountChip(
-                                              label:
-                                                  '$completedCount completed',
-                                              color: const Color.fromARGB(
-                                                255,
-                                                48,
-                                                49,
-                                                73,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: ListView.builder(
-                                          controller: controller,
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          itemCount: tasks.length,
-                                          itemBuilder: (context, index) {
-                                            final task = tasks[index];
-                                            return _TaskListItem(task: task);
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: CupertinoButton(
-                                color: CupertinoColors.activeGreen,
-                                borderRadius: BorderRadius.circular(35),
-                                onPressed: () => deleteCompletedTasks(ref),
-                                child: const Text(
-                                  'Remove Completed',
-                                  style: TextStyle(
-                                    color: CupertinoColors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
+            child: const ColoredBox(
+              color: Color.fromRGBO(0, 0, 0, 0.001),
+              child: _TasksSheetScaffold(),
             ),
           );
         },
       );
     },
   );
+}
+
+class _TasksSheetScaffold extends ConsumerWidget {
+  const _TasksSheetScaffold();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tasksAsync = ref.watch(allTasksProvider);
+    final taskCountsAsync = ref.watch(taskCountsProvider);
+
+    return GestureDetector(
+      onTap: () {},
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.72,
+        minChildSize: 0.2,
+        builder: (_, controller) {
+          return Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFF28293d),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25),
+                topRight: Radius.circular(25),
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 15),
+                const Text(
+                  'My Tasks',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: CupertinoColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: tasksAsync.when(
+                      loading: () => loadingWidget,
+                      error: (error, stackTrace) => _TaskListError(
+                        message: error.toString(),
+                      ),
+                      data: (tasks) {
+                        final counts = taskCountsAsync.asData?.value;
+                        final completedCount = counts?.completedCount ?? 0;
+                        final pendingCount = counts?.pendingCount ?? 0;
+
+                        if (tasks.isEmpty) {
+                          return const Center(
+                            child: Text('no tasks to show'),
+                          );
+                        }
+
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
+                              child: Row(
+                                children: [
+                                  _CountChip(
+                                    label: '$pendingCount active',
+                                    color: const Color.fromARGB(
+                                      255,
+                                      69,
+                                      71,
+                                      104,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  _CountChip(
+                                    label: '$completedCount completed',
+                                    color: const Color.fromARGB(
+                                      255,
+                                      48,
+                                      49,
+                                      73,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                controller: controller,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: tasks.length,
+                                itemBuilder: (context, index) {
+                                  final task = tasks[index];
+                                  return _TaskListItem(task: task);
+                                },
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: CupertinoButton(
+                      color: CupertinoColors.activeGreen,
+                      borderRadius: BorderRadius.circular(35),
+                      onPressed: () => deleteCompletedTasks(ref),
+                      child: const Text(
+                        'Remove Completed',
+                        style: TextStyle(
+                          color: CupertinoColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
 }
 
 class _TaskListError extends StatelessWidget {
@@ -224,7 +225,6 @@ class _TaskListItem extends ConsumerWidget {
             motion: const StretchMotion(),
             children: [
               SlidableAction(
-                autoClose: true,
                 onPressed: (_) async {
                   await controller.deleteTask(task.id);
                 },
